@@ -34,6 +34,7 @@
                     <li class="list-group-flush list-item-custom rezolvare" data-id="rezolvare">Cod</li>
                     <li class="list-group-flush list-item-custom explicatie" data-id="explicatie">Explicatie rezolvare</li>
                     <li class="list-group-flush list-item-custom complexitate" data-id="complexitate">Complexitate</li>
+                    <li class="list-group-flush list-item-custom corectitudine" data-id="corectitudine">Corectitudine</li>
                     <li class="list-group-flush list-item-custom executie" data-id="executie">Executie</li>
                   </ul>
           </div>
@@ -178,6 +179,26 @@ delete[] array;
                         <span style="color: #77dff1;">Complexitate:</span> O(n*log n) <br>
                         <span style="color: #77dff1;">Demonstratie complexitate:</span><br>
                         <img src="../img/complexitateInversiuni.png">
+                    </div>
+                  </div>                 
+              </div>
+              <div class="corectitudine-problema corectitudine problema hide">>
+                  <div class="row d-flex justify-content-center align-items-center vh-100">
+                    <div class="col-xs-12 col-custom">
+                      *Pentru simplitate cele trei bucle repetitive care realizeaza interclasarea si calculul numarului de inversiuni vor fi considerate una singura care se opreste cand ambele conditii sunt indeplinite, si care daca unul din subsiruri este gol va alege elemente din celalalt
+                      <br>
+                      <span class="evidentiere">Propozitie</span>: Inainte de fiecare pas al structurii repetitive, in tabloul tempArray[0..position-1] se afla cele mai mici “position” elemente din tabloul initial, in ordine crescatoare. In plus, “inversions” retine numarul de inversiuni exitente la care au participat toate elementele adaugate in tempArray.
+                      * position=(index1-left)+(index2-middle-1)
+                      <br>
+                      <span class="evidentiere">Initializare</span>: position==0 => tabloul tempArray[0..-1] este gol, iar inversions=0 <br>
+                      <span class="evidentiere">Mentenanta</span>: Fie position=k, inversions=q =>tempArray[0..k-1] contine cele mai mici k elemente din tabloul initial sortate crescator.<br>
+                      <span class="evidentiere">Daca</span> array[index1]<=array[index2] ,atunci array[index1] se adauga la solutie, tempArray[0..k] continand cele mai mici k+1 elemente din “array” in ordine crescatorare. Inversions ramane neschimbat;
+                      <br>
+                      <span class="evidentiere">Daca</span> array[index1]>array[index2], atunci array[index2] se adauga la solutie si tempArray[0..k] contine cele mai mici k+1 elemente din “array”, in ordine crescatoare, iar numarul de inversiuni va creste cu numarul de elemente din primul subsir, asadar inversions=q+middle-index1+1. Acesta este numarul total de invursiuni la care participa elementele deja adaugata in tempArray
+                      <br>
+                      <span class="evidentiere">Terminare</span>: index1=middle+1 SI index2=right+1<br>
+                      inversions=(index1-left)+(index2-middle-1)=middle+1-left+right+1-middle-1 =><br>
+                      inversion=right-left+1 => tempArray[0..right-left] contine toate elementele din array, sortate crescator, iar inversions va fi egal cu numarul de inversiuni ale elementelor plasate in tempArray, asadar al tuturor elementelor.
                     </div>
                   </div>                 
               </div>
