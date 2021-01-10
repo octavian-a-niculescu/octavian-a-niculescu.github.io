@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divide et Impera</title>
+    <link href="../css/normalize.css" rel="stylesheet" />
+    <link href="../css/fonts.min.css" rel="stylesheet" />
+    <link href="../css/main.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6612084f00.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <a href="../index.html" style="position: absolute; top: 0%; left: 2%;">
+    <img src="../img/logo_204.png" alt="" class="d-inline-block align-top img-custom">
+</a>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" style="color: #fff !important"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link nav-color" href="../index.html">Home</a>
+                <a class="nav-link nav-color" href="../introducereDEI.html">Introducere DEI</a>
+                <a class="nav-link nav-color" href="../DEIiterativ.html">DEI Iterativ</a>
+                <a class="nav-link nav-color nav-active" href="../problemeDEI.html">Probleme DEI</a>
+              </div>
+            </div>
+          </nav>
+          <div class="container-meniu">
+                <ul class="list-group" id="listUL">
+                    <li class="list-group-flush list-item-custom enunt" data-id="enunt">Enunt</li>
+                    <li class="list-group-flush list-item-custom rezolvare" data-id="rezolvare">Rezolvare + cod</li>
+                    <li class="list-group-flush list-item-custom explicatie" data-id="explicatie">Explicatie + Complexitate</li>
+                    <li class="list-group-flush list-item-custom executie" data-id="executie">Executie</li>
+                  </ul>
+          </div>
+              <div class="enunt-problema enunt problema">
+                <div class="row">
+                  <div class="col-xs-12 col-custom">
+                    <i class="fas fa-clipboard fontawesome-custom"></i>
+                  </div>
+                </div>
+                  <div class="row d-flex justify-content-center align-items-center vh-100">
+                    <div class="col-xs-12 col-custom">
+                      <div class="autor-problema">Autor: <span class="autor-problema-span">Vlad Florin</span></div>
+                      Imaginați-vă o mașină ipotetică în care flip(i) necesită întotdeauna O(1) timp. Scrieți un program eficient pentru sortarea unei matrice date în timp O(nLogn) pe mașina dată. 
+                    </div>
+                  </div>                 
+              </div>
+              <div class="rezolvare-problema rezolvare problema hide">
+                <div class="row d-flex justify-content-center align-items-center vh-100">
+                  <div class="col-xl-12">
+                    <pre class="pre-scrollable pre-custom">
+#include "stdlib.h" 
+#include "stdio.h"
+#include "iostream"
+using namespace std;
+
+int cautareCelula(int arr[], int low, int high, int x)
+{
+	int mid;
+
+	//Daca x este mai mic decat el sau egal cu primul termen, atunci return primul element
+	if (x <= arr[low])
+		return low;
+
+	//Daca x este mai mare decat ultimul element atunci return -1 
+	if (x > arr[high])
+		return -1;
+
+	//Luam indexul elementului de mijloc al arr[low..high]
+	mid = (low + high) / 2; /* low + (high – low)/2 */
+
+
+	//Daca x este la fel ca si elementul de mijloc, atunci return mid
+	if (arr[mid] == x)
+		return mid;
+
+	//Daca x este mai mare decat arr[mid], atunci fie arr[mid + 1] este celula lui x sau celula se afla in arr[mid+1...high]
+	if (arr[mid] < x)
+	{
+		if (mid + 1 <= high && x <= arr[mid + 1])
+			return mid + 1;
+		else
+			return cautareCelula(arr, mid + 1, high, x);
+	}
+
+	//Daca x este mai mic decat arr[mid], atunci fie arr[mid] este celula lui x sau celulele se afla in arr[mid-1...high]
+	if (mid - 1 >= low && x > arr[mid - 1])
+		return mid;
+	else
+		return cautareCelula(arr, low, mid - 1, x);
+}
+
+//Inversez arr[0..i] 
+void flip(int arr[], int i)
+{
+	int temp, start = 0;
+	while (start < i)
+	{
+		temp = arr[start];
+		arr[start] = arr[i];
+		arr[i] = temp;
+		start++;
+		i--;
+	}
+}
+
+//Functia de sortare a array care foloseste inserarea sort, cautarea binara si flip
+void insertiaSort(int arr[], int size)
+{
+	int i, j;
+
+	// incep de la al doilea element 
+	// si unul cate unul se insereaza arr[i]  
+	// in already sorted arr[0..i-1]  
+	for (i = 1; i < size; i++)
+	{
+		// Cauta elementul cel mai mic in arr[0..i-1] care este mai mare decat sau egal cu arr[i]
+		int j = cautareCelula(arr, 0, i - 1, arr[i]);
+
+		// Verifica daca nu a fost niciun element mai mare decat arr[i]  
+		if (j != -1)
+		{
+			// Pun arr[i] inainte de arr[j] folosind urmatoarele 4 operatiuni flip  
+			flip(arr, j - 1);
+			flip(arr, i - 1);
+			flip(arr, i);
+			flip(arr, j);
+		}
+	}
+}
+
+void printArray(int arr[], int n)
+{
+	int i;
+	for (i = 0; i < n; ++i)
+		cout << arr[i] << " ";
+}
+
+int main()
+{
+	int arr[] = { 18, 40, 35, 12, 30, 35, 20, 6, 90, 80 };
+	int n = sizeof(arr) / sizeof(arr[0]);
+	insertiaSort(arr, n);
+	printArray(arr, n);
+	return 0;
+}
+
+                    </pre>
+                  </div>
+                </div>                  
+              </div>
+              <div class="explicare-problema explicatie problema hide">
+                  <div class="row d-flex justify-content-center align-items-center vh-100">
+                    <div class="col-xs-12 col-custom">
+                      <div class="col-custom" style="text-align: left;">
+                        <span class="explicatie-rezolvare">Explicatie + Complexitate:</span>
+Dacă aplicăm un algoritm, timpul necesar va fi O(n ^ 2) deoarece algoritmul apelează findMax() într-o buclă și find findMax() ia O(n) timp chiar și pe această mașină ipotetică.
+Putem folosi sortare de inserare care utilizează căutare binară. Ideea este de a rula o buclă de la al doilea element la ultimul element (de la i = 1 la n-1), și rând pe rând introduceți arr[i] în arr[0..i-1] (cum ar fi algoritmul de sortare a inserției standard) . Când introducem un element arr[i], putem folosi căutarea binară pentru a găsi poziția lui arr[i] în timpul O(log i). Odată ce avem poziția, putem folosi câteva operații de răsturnare pentru a pune arr[i] în noul său loc. Urmează pași abstracte. <br>
+<br>// Buclă de sortare cu inserție standard care începe de la al doilea element
+<br>pentru (i = 1; i O (n)
+<br>{
+<br>  int key = arr [i];
+<br>
+<br>// Găsiți indexul plafonului lui arr [i] în arr [0..i-1] folosind căutare binară
+<br>  j = cellSearch (arr, key, 0, i-1); ----> O(logn)
+<br>    
+<br>  // Aplicați câteva operații de întoarcere pentru a pune arr [i] în locul corect
+<br>}
+<br>
+Deoarece operația de basculare ia O(1) pe o mașină ipotetică dată, timpul total de funcționare al algoritmului de mai sus este O(nlogn). Vedem cum funcționează algoritmul de mai sus. cautareCelula() returnează, de fapt, indexul celui mai mic element care este mai mare decât arr[i] în arr[0..i-1]. <br>
+Dacă nu există un astfel de element, acesta returnează -1. Să fie valoarea returnată j. Dacă j este -1, atunci nu trebuie să facem nimic, deoarece arr[i] este deja cel mai mare element dintre arr [0...i]. Altfel trebuie să punem arr[i] chiar înainte de arr[j]. Deci, cum să aplicați operațiile de răsturnare pentru a pune arr [i] chiar înainte de arr[j] folosind valorile lui i și j. Să luăm un exemplu pentru a înțelege acest lucru. <br>
+Fie i = 6 și matricea curentă să fie {12, 15, 18, 30, 35, 40, 20, 6, 90, 80}. Pentru a pune 20 la noul său loc, matricea trebuie schimbată în {12, 15, 18, 20, 30, 35, 40, 6, 90, 80}. Aplicăm următorii pași pentru a pune 20 în noul său loc.
+
+                        </div>
+                    </div>
+                  </div>                 
+              </div>
+            <div class="executie-problema executie problema hide">
+              <!-- <div class="row">
+                <div class="col-xs-12 col-custom">
+                  <i class="fas fa-cogs fontawesome-custom"></i>
+                </div>
+              </div> -->
+                <div class="row d-flex justify-content-center align-items-center vh-100">
+                  <div class="col-xs-12 col-custom">
+                      <span style="color: #77dff1;">Pasi executie:</span><br>
+                      <ol class="pasi-executie" id="pasi-exec">
+                        <li class="pas-executie pas1">Găsiți j folosind cautareCelula (În exemplul de mai sus j este 3).</li>
+                        <li class="pas-executie pas2 hide">flip (arr, j-1) (matricea devine {18, 15, 12, 30, 35, 40, 20, 6, 90, 80})</li>
+                        <li class="pas-executie pas3 hide">flip (arr, i-1); (matricea devine {40, 35, 30, 12, 15, 18, 20, 6, 90, 80}) </li>
+                        <li class="pas-executie pas4 hide">flip (arr, i); (matricea devine {20, 18, 15, 12, 30, 35, 40, 6, 90, 80})</li>
+                        <li class="pas-executie pas5 hide">flip (arr, j); (matricea devine {12, 15, 18, 20, 30, 35, 40, 6, 90, 80})</li>
+                      </ol>
+                      <div class="navigatie-sageti" style="position: absolute; top: 70%; left: 4%;">
+                        <i class="fas fa-arrow-left fa-arrow-custom"></i>
+                        <i class="fas fa-arrow-right fa-arrow-custom"></i>
+                      </div>
+                  </div>
+                </div> 
+          </div>
+          </div>
+      </div>
+    </div>
+</body>
+<script src="../js/meniu.js"></script>
+<script src="../js/clatite-exec.js"></script>
+</html>

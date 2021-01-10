@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divide et Impera</title>
+    <link href="../css/normalize.css" rel="stylesheet" />
+    <link href="../css/fonts.min.css" rel="stylesheet" />
+    <link href="../css/main.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6612084f00.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <a href="../index.html" style="position: absolute; top: 0%; left: 2%;">
+    <img src="../img/logo_204.png" alt="" class="d-inline-block align-top img-custom">
+</a>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" style="color: #fff !important"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link nav-color" href="../index.html">Home</a>
+                <a class="nav-link nav-color" href="../introducereDEI.html">Introducere DEI</a>
+                <a class="nav-link nav-color" href="../DEIiterativ.html">DEI Iterativ</a>
+                <a class="nav-link nav-color nav-active" href="../problemeDEI.html">Probleme DEI</a>
+              </div>
+            </div>
+          </nav>
+          <div class="container-meniu">
+                <ul class="list-group" id="listUL">
+                    <li class="list-group-flush list-item-custom enunt" data-id="enunt">Enunt</li>
+                    <li class="list-group-flush list-item-custom rezolvare" data-id="rezolvare">Cod</li>
+                    <li class="list-group-flush list-item-custom explicatie" data-id="explicatie">Explicatie rezolvare</li>
+                    <li class="list-group-flush list-item-custom complexitate" data-id="complexitate">Complexitate</li>
+                    <li class="list-group-flush list-item-custom executie" data-id="executie">Executie</li>
+                  </ul>
+          </div>
+              <div class="enunt-problema enunt problema">
+                <div class="row">
+                  <div class="col-xs-12 col-custom">
+                    <i class="fas fa-clipboard fontawesome-custom"></i>
+                  </div>
+                </div>
+                  <div class="row d-flex justify-content-center align-items-center vh-100">
+                    <div class="col-xs-12 col-custom">
+                      <div class="autor-problema">Autor: <span class="autor-problema-span">Madalin Vladoiu</span></div>
+                      Sa se implementeze o metoda eficienta de inmultire a doua numere in baza 10.
+                    </div>
+                  </div>                 
+              </div>
+              <div class="rezolvare-problema rezolvare problema hide">
+                <div class="row d-flex justify-content-center align-items-center vh-100">
+                  <div class="col-xl-12">
+                    <pre class="pre-scrollable pre-custom">
+int Power(int base, int exponent)
+{
+	int answer = 1;
+
+	for (int power = 1; power <= exponent; power++)
+		answer *= base;
+
+	return answer;
+}
+
+int Split(int number, int half, char position)
+{
+	if (position == 'L')
+	{
+		return number / Power(10, half);
+	}
+	if (position == 'R')
+	{
+		return number % Power(10, half);
+	}
+}
+
+int SizeOf(int number)
+{
+	int sizeOfNumber = 0;
+
+	do
+	{
+		sizeOfNumber++;
+		number /= 10;
+
+	} while (number);
+
+	return sizeOfNumber;
+}
+
+int Karatsuba(int number1, int number2)
+{
+	if (number1 < 10 || number2 < 10)
+	{
+		return number1 * number2;
+	}
+
+	int min = std::min(SizeOf(number1), SizeOf(number2));
+
+	int leftOfNumber1 = Split(number1, min / 2, 'L');
+	int rightOfNumber1 = Split(number1, min / 2, 'R');
+	int leftOfNumber2 = Split(number2, min / 2, 'L');
+	int rightOfNumber2 = Split(number2, min / 2, 'R');
+
+	
+
+
+	int multiplication1 = Karatsuba(leftOfNumber1, leftOfNumber2);
+	int multiplication2 = Karatsuba((rightOfNumber1 - leftOfNumber1), (leftOfNumber2 - rightOfNumber2));
+	//int multiplication2 = Karatsuba((rightOfNumber1 + leftOfNumber1), (leftOfNumber2 + rightOfNumber2));
+	int multiplication3 = Karatsuba(rightOfNumber1, rightOfNumber2);
+
+
+	return multiplication1 * Power(10, min / 2 * 2) + ((multiplication2 + multiplication1 + multiplication3) * Power(10, min / 2)) + multiplication3;
+	//return multiplication1 * Power(10, min / 2 * 2) + ((multiplication2 - multiplication1 - multiplication3) * Power(10, min / 2)) + multiplication3;
+
+
+}
+
+
+int main()
+{
+	int number1, number2;
+
+	std::cin >> number1 >> number2;
+	std::cout << Karatsuba(number1, number2);
+}
+                    </pre>
+                  </div>
+                </div>                  
+              </div>
+              <div class="explicare-problema explicatie problema hide">
+                <div class="row">
+                  <div class="col-xs-12 col-custom">
+                    <i class="far fa-lightbulb fontawesome-custom"></i>
+                  </div>
+                </div>
+                  <div class="row d-flex justify-content-center align-items-center vh-100">
+                    <div class="col-xs-12 col-custom">
+                      <div class="col-custom" style="text-align: left;">
+                        <span class="explicatie-rezolvare">Explicatie rezolvare:</span>  
+                        Functia Karatsuba este o functie recursiva care la fiecare pas
+sectioneaza numerele de inmultit in cate 2 alte numere de lungimi aproximativ egale.Functia se reapeleaza de 3 ori avand ca parametri combinatii de cele 4 numere obtinute respectand formula de mai sus.
+                        </div>
+                    </div>
+                  </div>                 
+              </div>
+              <div class="complexitate-problema complexitate problema hide">
+                <div class="row">
+                  <div class="col-xs-12 col-custom">
+                    <i class="fas fa-chart-line fontawesome-custom"></i>
+                  </div>
+                </div>
+                  <div class="row d-flex justify-content-center align-items-center vh-100">
+                    <div class="col-xs-12 col-custom">
+                        <span style="color: #77dff1;">Complexitate:</span> O(n) <br>
+                        <span style="color: #77dff1;">Demonstratie complexitate:</span><br>
+                        T(n) = 3*T(n/2) + c*n + c2
+T(n) = a*T(n/b) + f(n)
+a = 3 ≥ 1    b = 2 > 1
+f(n) = c*n + c2
+f(n) ∈  O(n) = O(nlog23 - ε)
+=> cazul I Teorema Master
+=>T(n) = θ(nlog23)
+
+                    </div>
+                  </div>                 
+              </div>
+            <div class="executie-problema executie problema hide">
+              <!-- <div class="row">
+                <div class="col-xs-12 col-custom">
+                  <i class="fas fa-cogs fontawesome-custom"></i>
+                </div>
+              </div> -->
+                <div class="row d-flex justify-content-center align-items-center vh-100">
+                  <div class="col-xs-12 col-custom">
+                    <div class="img-wrapper">
+                      <img src="../img/executieKaratsuba.jpg" id="imagine-BST" style="width: 100%;">
+                    </div>     
+                  </div>
+                </div> 
+          </div>
+          </div>
+      </div>
+    </div>
+</body>
+<script src="../js/meniu.js"></script>
+</html>

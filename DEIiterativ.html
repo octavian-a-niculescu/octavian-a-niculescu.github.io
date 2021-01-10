@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divide et Impera</title>
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/fonts.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6612084f00.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <a href="index.html" style="position: absolute; top: 0%; left: 2%;">
+    <img src="./img/logo_204.png" alt="" class="d-inline-block align-top img-custom">
+</a>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" style="color: #fff !important"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link nav-color" href="./index.html">Home</a>
+                <a class="nav-link nav-color" href="./introducereDEI.html">Introducere DEI</a>
+                <a class="nav-link nav-color nav-active" href="./DEIiterativ.html">DEI Iterativ</a>
+                <a class="nav-link nav-color" href="./problemeDEI.html">Probleme DEI</a>
+              </div>
+            </div>
+          </nav>
+          <div class="container-meniu">
+            <ul class="list-group" id="listUL">
+                <li class="list-group-flush list-item-custom introducere" data-id="introducere-problema">Introducere</li>
+                <li class="list-group-flush list-item-custom pasi" data-id="pasi-problema">Pasi necesari</li>
+                <li class="list-group-flush list-item-custom trecere" data-id="trecere-problema">Trecere in iterativ</li>
+                <li class="list-group-flush list-item-custom complexitate" data-id="complexitate-problema">Complexitate iterativ</li>
+              </ul>
+      </div>
+      <div class="introducere-problema problema">
+        <div class="row">
+          <div class="col-xs-12 col-custom">
+            <i class="fas fa-play fontawesome-custom"></i>
+          </div>
+        </div>
+          <div class="row d-flex justify-content-center align-items-center vh-100">
+            <div class="col-xs-12 col-custom">
+              <div class="subtitlu-introducere">De ce folosim DEI Iterativ?</div>
+              Utilizam o varianta <span class="evidentiere">iterativa</span> a tehnicii Divide et Impera din 2 mari motive:
+                      <ul class="lista-observatii">
+                        <li>Poate fi mult mai eficienta in <span class="evidentiere">executia</span> programului</li>
+                        <li>Nu necesita consideratii privind <span class="evidentiere">stiva</span> ce se afla in spatele variantei recursive, ce poate conduce la erori in cazul in care aceasta se umple</li>
+                      </ul> 
+                      Am folosit „poate” deoarece, in functie de scopul <span class="evidentiere">subprogramului</span>, varianta recursiva este mai practica in special in cazul algoritmilor ce implica arbori (in general structuri de date recursive), sau care pur si simplu au o metoda mult prea complexa in forma iterativa.          
+            </div>
+          </div>                 
+      </div>
+      <div class="pasi-problema problema hide">
+        <div class="row">
+          <div class="col-xs-12 col-custom">
+            <i class="fas fa-shoe-prints fontawesome-custom"></i>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center vh-100">
+          <div class="col-xs-12 col-custom">
+            Pasi pentru trecerea la <span class="evidentiere">iterativ</span>:
+<ol class="pasi-executie">
+<li><span class="evidentiere">Identificati</span> instructiunea repetitiva ce doriti sa o transformati. Instructiunea ar trebui sa modifice unul sau mai multi locali cu un scop particular, si apoi sa returneze un rezultat bazat pe valorile lor finale.</li>
+<li>Mutati instructiunea <span class="evidentiere">repetitiva</span> intr-o noua functie.</li>
+<li>Compliati si verificati <span class="evidentiere">rezultatul</span>.</li>
+<li>Inlocuiti <span class="evidentiere">instructiunea</span> repetitiva cu o functie care accepta variabilele locale, si care returneaza rezultatul final.</li>
+<li>Implementarea <span class="evidentiere">functiei</span> ar trebui sa fie o instructiune decizionala, care testeaza conditia buclei ( while(conditie) ). Ramura de executie a conditiei ("then") ar trebui sa calculeze/ returneze rezultatul final. Ramura de "else" va face apelul recursiv, cu parametri modificati corespunzator.</li>
+<li>Compilati si verificati <span class="evidentiere">rezultatul</span>.</li>
+<li>Restructurati noua functie. Poate puteti elimina niste variabile <span class="evidentiere">auxiliare</span>, sau poate gasiti o structura mai buna pentru instructiunea decizionala in functia recursiva</li>
+</ol>
+          </div>
+        </div>                 
+      </div>
+      <div class="trecere-problema problema hide">
+        <div class="row">
+          <div class="col-xs-12 col-custom">
+            <i class="fas fa-arrow-circle-right fontawesome-custom"></i>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center vh-100">
+          <div class="col-xl-12" style="margin-top: 5rem;">
+            <div class="subtitlu-introducere">Cod iterativ (transformat din recursiv, de la introducere)</div>
+          <pre class="pre-scrollable pre-custom">
+int Factorial(int num)
+{
+int result = 1;
+if (num <= 1) 
+return result;
+while (num > 1)
+{
+result * = num;
+num--;
+}
+return result;
+}           
+          </pre>
+        </div>
+        </div>                  
+      </div>
+      <div class="complexitate-problema problema hide">
+        <div class="row">
+          <div class="col-xs-12 col-custom">
+            <i class="fas fa-chart-line fontawesome-custom"></i>
+          </div>
+        </div>
+          <div class="row d-flex justify-content-center align-items-center vh-100">
+            <div class="col-xs-12 col-custom">
+              <div class="subtitlu-introducere">Complexitate iterativ</div>
+              Complexitate de <span class="evidentiere">timp</span>: operatia cea mai costisitoare din functia factorial iterativa este while-ul, care pentru o valoare aleatorie n, executa cele 2 operatii din interiorul sau de n ori. Astfel, complexitatea algoritmului este O(n). <br>
+              Complexitate de <span class="evidentiere">spatiu</span>: intrucat nu avem nevoie decat de 2 variabile, una ce primeste valoarea a carui factorial vrem sa il aflam si rezultatul ce se construieste in instructiunea repetitiva, complexitatea este O(1).
+            </div>
+          </div>                 
+      </div>                
+  </div>
+</body>
+<script src="./js/meniu.js"></script>
+</html>
