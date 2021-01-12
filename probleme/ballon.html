@@ -105,9 +105,8 @@ std::cout << aflareMaxim(a, 0, numarBaloane-1);
                     <div class="col-xs-12 col-custom">
                       <div class="col-custom" style="text-align: left;">
                         <span class="explicatie-rezolvare">Explicatie rezolvare:</span>  
-                        Programul citeste baloanele introduse de catre utilizator,dupa care prin intermediul functiei aflareMaxim se va calcula numarul maxim de puncte care se poate optine prin spargerea baloanelor date.
-Funtia aflareMaxim funtioneaza dupa tehnica divide et impera.Fiecare balon din problema va fi luat individual si lucrata problema in jurul acestuia.De aceea balonul ales v-a fi spart doar la final si pe langa acest lucru se vor aduga si valorile maxime obtinute dupa rezolvarea subproblemelor independente care sunt rezolvate in jurul acestui balon respectiv la stanga si dreapta lui.
-
+                        Programul citeste baloanele introduse de catre utilizator,dupa care prin intermediul functiei aflareMaxim se va calcula numarul maxim de puncte care se poate optine prin spargerea baloanelor date.Functia aflareMaxim functioneaza dupa tehnica divide et impera.Fiecare balon din problema este luat individual si in jurul acestuia se vor realiza mai multe apelari ale functiei aflareMaxim care vor lucra la stanga sau la dreapta acestuia daca este posibil.
+Rezultatele aflate in urma apelarilor functiei aflareMaxim se vor aduna si la final va fi adunat si balon care a fost ales pentru a fi spart ultimul si acesta va forma un maxim pentru moment.Se va realiza acelas lucru si pentru celelalte baloane ,iar la final aceste maxime vor fi parcurse in ordinea inversa aflarii si se va realiza un maxim_global care va fi si afisat.
                         </div>
                     </div>
                   </div>                 
@@ -120,9 +119,9 @@ Funtia aflareMaxim funtioneaza dupa tehnica divide et impera.Fiecare balon din p
                 </div>
                   <div class="row d-flex justify-content-center align-items-center vh-100">
                     <div class="col-xs-12 col-custom">
-                        <span style="color: #77dff1;">Complexitate:</span> O(n) <br>
+                        <span style="color: #77dff1;">Complexitate:</span> O(n^3) <br>
                         <span style="color: #77dff1;">Demonstratie complexitate:</span><br>
-                        -
+                        Din cauza ca gasim un optim local pentru fiecare parcurgere si spargem fiecare balon din fiecare vector pentru a gasi solutia optima avem complexitate O(n^2) care mai este inmultita cu un O(n) ce reprezinta lungimea fiecarui vector
                     </div>
                   </div>                 
               </div>
