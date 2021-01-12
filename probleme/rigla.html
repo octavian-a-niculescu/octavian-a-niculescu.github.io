@@ -157,12 +157,10 @@ T(n) = 2T(n/2) + n = Θ (nlogn) (din teorema 2 Master )
               </div>
                 <div class="row d-flex justify-content-center align-items-center vh-100">
                   <div class="col-xs-12 col-custom" style="margin-top: 10rem;">
-                    Algoritmul este asemanator celui de Cautare Binara.
-La fiecre pas calculatorul genereaza un numar random (prin subprogramul GenerareNumar) care va fi luat ca pivot iar cautarea se va face in functie de compararea numarului gandit de utilizator cu pivotul ales random.
-   Se introduc limitele  Stanga si Dreapta initializate cu 1 si 100 intre care se va genera numarul random. 
-Utilizatorul va introduce 'M' daca numarul oferit este mai mare decat cel la care s-a gandit acesta , daca este mai mic vei scrie 'm' iar daca este egal vei scrie  '='.  Folosim contorul Am ghicit initializat cu 0 pe post de conditie de opririe.Atunci cand utilizatorul introduce caracterul '=' Am ghicit va lua valoarea 1 , astfel oprind executia.
-  
- Odata ce este introdusa alta valoare decat '=' limitele  Stanga si Dreapta se vor modifica dupa caz: <br>
+                    Programul este asemanator celui de cautare binara in sensul ca se folosesc 2 limite : Start si Capat ce reprezinta inceputul zonei ce trebuie marcata , respectiv finalul, la fiecare pas injumatatindu-se domeniul de cautare. Vom folosi subprogramul void Gradare(int start, int capat, int contor, char marcaj, char v[1000]) cu cei 5 parametrii descrisi mai sus care va marca cu o litera fiecare jumatate a fiecarui interval urmand sa se reapeleze in mod recursiv functia pentru jumatatea din satanga, respectiv dreapta. Si incrementand de fiecare data variabila marcaj astfel marind  codul ascii al literei propuse intial.
+  Se citeste de la tastatura lungimea riglei iar apoi va fi initializata cu caracterul '_' pe tot parcursul lungimii folosind un for.
+ Apelam in main subprogramul recursiv Gradare cu datele : start, capat, log2(16), 'A', v  pentru a marca mijlocul riglei cu valoarea initiala A , dupa fiecare reapelare a subprogramului valoarea A va creste , sferturile marcandu-se cu B si asa mai departe. Am folosit notatia log2(16) pentru a marca faptul ca avem nevoie de saisprezecimi contorul va scadea pentru fiecare reapelare a subprogramului ajungerea lui la o valoarea <=0 fiind conditia principala de oprire a recursivitatii.
+  Dupa iesirea din subprogram vom afisa rigla cu valorile sale finale folodind un for. <br>
                       <span style="color: #77dff1;">Pasi executie:</span><br>
                       <ol class="pasi-executie" id="pasi-exec">
                         <li class="pas-executie pas">Daca este introdus 'm' contorul Stanga va lua valoarea numarului random generat+1 astfel cautarea facandu-se intre numarul respins anterori ca fiind prea mic si limita superioara, initial 100</li>
