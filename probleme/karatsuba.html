@@ -155,15 +155,15 @@ sectioneaza numerele de inmultit in cate 2 alte numere de lungimi aproximativ eg
                 </div>
                   <div class="row d-flex justify-content-center align-items-center vh-100">
                     <div class="col-xs-12 col-custom">
-                        <span style="color: #77dff1;">Complexitate:</span> O(n) <br>
+                        <span style="color: #77dff1;">Complexitate:</span> θ(n^log3) <br>
                         <span style="color: #77dff1;">Demonstratie complexitate:</span><br>
                         T(n) = 3*T(n/2) + c*n + c2
 T(n) = a*T(n/b) + f(n)
 a = 3 ≥ 1    b = 2 > 1
 f(n) = c*n + c2
-f(n) ∈  O(n) = O(nlog23 - ε)
+f(n) ∈  O(n) = O(n^log3 - ε)
 => cazul I Teorema Master
-=>T(n) = θ(nlog23)
+=>T(n) = θ(n^log3)
 
                     </div>
                   </div>                 
