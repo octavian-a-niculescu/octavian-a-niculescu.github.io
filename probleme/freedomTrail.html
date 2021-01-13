@@ -52,8 +52,10 @@
                       Input: cadran=”casa”,keye=”cas”<br>
                       Output:5<br>
                       Primul caracter c se afla pe prima pozitie deci avem 0 pasi,dupa care cautam a care mai adauga inca 1 pozitii ,iar in final cautam s care adauga inca o pozitie.La final avem 2 pasi facuti si mai adaugam inca 3 reprezentand apasarile de buton.
-                       
-                    </div>
+                      <div class="sursa-enunt">
+                        <span class="evidentiere">Sursa</span>: <a href="https://leetcode.com/problems/freedom-trail/" class="link-sursa">click!</a>
+                      </div>
+                    </div>              
                   </div>                 
               </div>
               <div class="rezolvare-problema rezolvare problema hide">
@@ -118,8 +120,8 @@ std::cout<< gasireCaleBuna(ring, key, 0, lungimeCuvant, lungimeKeye, 0) + lungim
                     <div class="col-xs-12 col-custom">
                       <div class="col-custom" style="text-align: left;">
                         <span class="explicatie-rezolvare">Explicatie rezolvare:</span>  
-                        Programul asteapta introducerea de la tastatura de catre utilizator a unui cuvant si a unei key.Dupa introducerea acestor date incepem cautarea celei mai scurte cai de a forma cuvantul keye din cuvantul dat de catre utilizator.
-                        Daca cuvantul introdus de utilizator sau keya nu sunt valide programul va afisa 0.In cazul in care totul este bine programul va incepe cautarea celei mai scurte cai de a forma keya.Pentru inceput se cauta pozitia primei litere din keye in cuvantul propus,dupa care se va realiza un minim pentru a putea afla in ce sens trebuie rotit cadranul si la final pentru a vedea cate etape sunt necesare pentru formarea cuvantului keye. 
+                        Programul asteapta introducerea de la tastatura de catre utilizator a unui cuvant si a unei key.Dupa introducerea acestor date incepem cautarea celei mai scurte cai de a forma cuvantul keye din cuvantul dat de catre utilizator. 
+Pentru inceput vom afla pozitia primei litere din keye in cadran,dupa care avand aceasta pozitie ca pivot vom afla in functie de aceasta pozitile celorlalte care ulterior vor devenii si ele pivoti.Astfel se vor forma niste distante(minime) care vor vi adaugate la resultatul final.
                         </div>
                     </div>
                   </div>                 
@@ -132,9 +134,9 @@ std::cout<< gasireCaleBuna(ring, key, 0, lungimeCuvant, lungimeKeye, 0) + lungim
                 </div>
                   <div class="row d-flex justify-content-center align-items-center vh-100">
                     <div class="col-xs-12 col-custom">
-                        <span style="color: #77dff1;">Complexitate:</span> O(n) <br>
+                        <span style="color: #77dff1;">Complexitate:</span> O(n^2) <br>
                         <span style="color: #77dff1;">Demonstratie complexitate:</span><br>
-                        -
+                        Din cauza ca vom gasi un optim local pentru fiecare litera din keye si vom lua fiecare litera din keye separat avem complexitate O(n^2)
                     </div>
                   </div>                 
               </div>

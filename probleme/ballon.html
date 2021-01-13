@@ -50,6 +50,9 @@
                       Acest joc este reprezentat de:ai in fata ta n baloane care sunt numerotate de la 0 la n-1. <br>Pe fiecare balon este desenat un numar ,iar daca spargi balonul de pe pozitia i atunci vei primi <br>
                       Puncte dupa formula:balonul[i-1]*balonul[i]* balonul[i+1].Dupa ce balonul dupa pozitia i este spart atunci vecinii acestuia devin adiacenti.Daca un vecin nu exista atunci se va aloca valoare 1 pentru acea pozitie. <br>
                       Pentru a castiga premiul cel mare Mircea trebuie sa realizeze cum poate obtine numarul maxim de puncte spargand baloanele corespunzatoare.
+                      <div class="sursa-enunt">
+                        <span class="evidentiere">Sursa</span>: <a href="https://leetcode.com/problems/burst-balloons/" class="link-sursa">click!</a>
+                      </div>
                     </div>
                   </div>                 
               </div>
@@ -60,35 +63,81 @@
 #include "iostream"
 #include "algorithm" 
 using namespace std;
- 
+
 int aflareMaxim(int array[], int inceput, int final)
 {
-if (inceput == final)
-return array[inceput];
-else {
-int max_coin = 0;
-for (int i = inceput + 1; i < final; i++)
+	if (inceput == final-1)
+		return 0;
+	else {
+		int max_coin = 0;
+		for (int i = inceput + 1; i < final; i++)
+		{
+			int score = array[inceput] * array[i] * array[final];
+			max_coin = max(max_coin, score + aflareMaxim(array, inceput, i) + aflareMaxim(array, i, final));
+		}
+		return max_coin;
+	}	
+}
+void modIntroducereBaloane()//
 {
-int score = array[inceput] * array[i] * array[final];
-max_coin = max(max_coin, score + aflareMaxim(array, inceput, i) + aflareMaxim(array, i, final));
+	int intrare, numarBaloane;;
+	cin >> intrare;
+	switch (intrare)
+	{
+		//cazul in care utilizatorul vrea sa introduca el baloanele
+	case 1: {
+		cout << "Introduceti numarul de baloane : ";
+		cin >> numarBaloane;
+		if (numarBaloane > 0)
+		{
+			cout << endl;
+			cout << "Introduceti baloanele : ";
+			int vectorBaloane[999], balonCitit;
+			vectorBaloane[0] = vectorBaloane[numarBaloane + 1] = 1;
+			for (int i = 1; i < numarBaloane + 1; i++)
+			{
+				cin >> balonCitit;
+				vectorBaloane[i] = balonCitit;
+			}
+			cout << endl;
+			std::cout << "Numarul maxim de puncte care poate fi obtinut este : ";
+			std::cout << aflareMaxim(vectorBaloane, 0, numarBaloane + 1);
+			cout << endl;
+			break;
+		}
+		else {
+			cout << "Numarul de baloane este introdus gresit!!Introdu un numar >0";
+			break;
+		}
+	}
+			//cazul in care utilizatorul nu introduce baloanele si lasa programul sa ruleze cu datele sale
+	case 2:
+	{
+		int vectorBaloane[] = { 3,5,9 };
+		int numarBaloane = sizeof(vectorBaloane) / sizeof(vectorBaloane[0]) + 2;
+		int vectorBaloaneFinal[999];
+		vectorBaloaneFinal[0] = vectorBaloaneFinal[numarBaloane - 1] = 1;
+		for (int i = 0; i < numarBaloane - 2; i++)
+		{
+			vectorBaloaneFinal[i + 1] = vectorBaloane[i];
+		}
+		cout << endl;
+		std::cout << "Numarul maxim de puncte care poate fi obtinut este : ";
+		std::cout << aflareMaxim(vectorBaloaneFinal, 0, numarBaloane - 1);
+		cout << endl;
+	}
+	}
 }
-return max_coin;
-}	
-}
- 
+
 int main()
-{
-int vectorBaloane[] = { 1,2,3,4,5};
-    int numarBaloane = sizeof(vectorBaloane) / sizeof(vectorBaloane[0])+2;
-int a[999];
-a[0] = a[numarBaloane - 1] = 1;
-for (int i = 0; i < numarBaloane-2; i++)
-{
-a[i + 1] = vectorBaloane[i];
+{	
+	cout << "Alegeti modul de rezolvare al problemei.Apasati tasta 1 pentru a introduce baloanele manual sau tasta 2 pentru a incepe problema cu datele deja inregistrare in program : ";
+	modIntroducereBaloane();
 }
-std::cout << "Numarul maxim de puncte este : ";
-std::cout << aflareMaxim(a, 0, numarBaloane-1);
-}
+
+
+
+
 
 
                     </pre>
